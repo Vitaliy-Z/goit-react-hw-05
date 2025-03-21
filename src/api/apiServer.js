@@ -17,7 +17,7 @@ export const fetchTrendingMovies = async () => {
   const { data } = await axios.get("/trending/movie/day", {
     params: { page: 1 }
   });
-  return data;
+  return data.results;
 };
 
 // fetchSearchMovie("sun").then((data) => console.log(data));
@@ -35,17 +35,19 @@ export const fetchMovieById = async (id) => {
 };
 
 // fetchCreditsMovieById(447273).then((data) => console.log(data));
-export const fetchCreditsMovieById = async (id) => {
+export const fetchCastMovieById = async (id) => {
   const { data } = await axios.get(`/movie/${id}/credits`);
-  return data;
+  return data.cast;
 };
 
 // fetchReviewsMovieById(447273).then((data) => console.log(data));
 export const fetchReviewsMovieById = async (id) => {
   const { data } = await axios.get(`/movie/${id}/reviews`);
-  return data;
+  return data.results;
 };
 
 // console.log(makeSrcForPoster("/2siOHQYDG7gCQB6g69g2pTZiSia.jpg"));
 export const makeSrcForPoster = (posterPath) =>
-  `https://image.tmdb.org/t/p/w500${posterPath}`;
+  posterPath
+    ? `https://image.tmdb.org/t/p/w500${posterPath}`
+    : "https://png.pngtree.com/png-clipart/20230823/original/pngtree-default-placeholder-businessman-half-length-portr-picture-image_8195617.png";
