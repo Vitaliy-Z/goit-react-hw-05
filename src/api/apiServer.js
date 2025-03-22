@@ -12,7 +12,6 @@ axios.defaults.params = {
   language: "ua-UA"
 };
 
-// fetchTrendingMovies().then((data) => console.log(data));
 export const fetchTrendingMovies = async () => {
   const { data } = await axios.get("/trending/movie/day", {
     params: { page: 1 }
@@ -20,33 +19,28 @@ export const fetchTrendingMovies = async () => {
   return data.results;
 };
 
-// fetchSearchMovie("sun").then((data) => console.log(data));
 export const fetchSearchMovie = async (query) => {
   const { data } = await axios.get("/search/movie", {
     params: { page: 1, query }
   });
-  return data;
+  return data.results;
 };
 
-// fetchMovieById(447273).then((data) => console.log(data));
 export const fetchMovieById = async (id) => {
   const { data } = await axios.get(`/movie/${id}`);
   return data;
 };
 
-// fetchCreditsMovieById(447273).then((data) => console.log(data));
 export const fetchCastMovieById = async (id) => {
   const { data } = await axios.get(`/movie/${id}/credits`);
   return data.cast;
 };
 
-// fetchReviewsMovieById(447273).then((data) => console.log(data));
 export const fetchReviewsMovieById = async (id) => {
   const { data } = await axios.get(`/movie/${id}/reviews`);
   return data.results;
 };
 
-// console.log(makeSrcForPoster("/2siOHQYDG7gCQB6g69g2pTZiSia.jpg"));
 export const makeSrcForPoster = (posterPath) =>
   posterPath
     ? `https://image.tmdb.org/t/p/w500${posterPath}`

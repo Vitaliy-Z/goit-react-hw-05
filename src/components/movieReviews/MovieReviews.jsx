@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import PacmanLoader from "react-spinners/PacmanLoader";
 import { fetchReviewsMovieById, makeSrcForPoster } from "../../api/apiServer";
 
 import styles from "./MovieReviews.module.css";
@@ -7,15 +8,20 @@ import styles from "./MovieReviews.module.css";
 export default function MovieReviews() {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    setIsLoading(true);
+    setError(null);
     const getReviews = async () => {
       try {
         const data = await fetchReviewsMovieById(movieId);
         setReviews(data);
       } catch (err) {
         setError(err);
+      } finally {
+        setIsLoading(false);
       }
     };
     getReviews();
@@ -23,6 +29,18 @@ export default function MovieReviews() {
 
   return (
     <>
+      {isLoading && (
+        <PacmanLoader
+          color="red"
+          cssOverride={{
+            margin: "30px auto",
+            color: "#007bff"
+          }}
+          size={20}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      )}
       {error && <Error />}
       {reviews.length === 0 ? (
         <p>No reviews yet!</p>
