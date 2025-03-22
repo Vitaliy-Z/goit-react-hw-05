@@ -2,10 +2,10 @@ import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import PacmanLoader from "react-spinners/PacmanLoader";
 
-const HomePage = lazy(() => import("../../page/HomePage"));
-const MoviesPage = lazy(() => import("../../page/MoviesPage"));
-const MovieDetailsPage = lazy(() => import("../../page/MovieDetailsPage"));
-const NotFoundPage = lazy(() => import("../../page/NotFoundPage"));
+const HomePage = lazy(() => import("../../pages/HomePage"));
+const MoviesPage = lazy(() => import("../../pages/MoviesPage"));
+const MovieDetailsPage = lazy(() => import("../../pages/MovieDetailsPage"));
+const NotFoundPage = lazy(() => import("../../pages/NotFoundPage"));
 
 import MovieCast from "../movieCast/MovieCast";
 import MovieReviews from "../movieReviews/MovieReviews";
